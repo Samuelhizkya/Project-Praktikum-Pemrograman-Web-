@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Infokus;
-use App\Models\Peminjaman;
 
 class DashboardController extends Controller
 {
@@ -11,11 +10,14 @@ class DashboardController extends Controller
     {
         $totalInfokus = Infokus::count();
 
-        $totalDipinjam = Peminjaman::where('status', 'dipinjam')->count();
+        $totalDipinjam = Infokus::where('status', 'dipinjam')->count();
+
+        $totalTersedia = Infokus::where('status', 'tersedia')->count();
 
         return view('dashboard', compact(
             'totalInfokus',
-            'totalDipinjam'
+            'totalDipinjam',
+            'totalTersedia'
         ));
     }
 }
